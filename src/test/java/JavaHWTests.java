@@ -1,7 +1,10 @@
+import com.codeborne.selenide.CollectionCondition;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -28,6 +31,18 @@ public class JavaHWTests extends TestBase {
 
 
     }
+    @ValueSource(strings = {
+            "Сертификаты Wildberries"
+    })
+    @ParameterizedTest(name = "Просмотрим какую то страницу ")
+    void checkBrowserPage(String Check){
+        open("https://www.wildberries.ru/");
+        $(".nav-element__burger-line").click();
+        $("a[href=\"/gift/certificates\"]").shouldHave(text(Check));
+
+
+    }
+
 }
 
 
